@@ -1,0 +1,17 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.djr4/datavessel",
+  "description": "100+ read/write tools: GA4, Search Console, Google/Meta Ads, Shopify, WooCommerce, Shopware. BYOK.",
+  "websiteUrl": "https://datavessel.io",
+  "repository": {
+    "url": "https://github.com/djr4/datavessel-mcp-public",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.datavessel.io/mcp"
+    }
+  ]
+}
