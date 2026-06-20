@@ -46,47 +46,53 @@ One agent, your whole stack — pull data *and* take action.
 
 ## Setup
 
-1. **Get an API key** — sign up at [www.datavessel.io](https://www.datavessel.io)
-   and create an API key in the [dashboard](https://app.datavessel.io). Connect
-   the data sources you want (Google, Shopify, etc.) via OAuth there. See
-   [datavessel.io/mcp](https://datavessel.io/mcp) for the full MCP overview.
-2. **Add the server to your MCP client.** The connection is remote Streamable
-   HTTP at `https://mcp.datavessel.io/mcp`, authenticated with your API key.
+1. **Create your account** — sign up at [www.datavessel.io](https://www.datavessel.io)
+   and connect the data sources you want (Google, Shopify, etc.) via OAuth in the
+   [dashboard](https://app.datavessel.io). See [datavessel.io/mcp](https://datavessel.io/mcp)
+   for the full MCP overview.
+2. **Add the server to your MCP client** using the remote Streamable HTTP URL
+   `https://mcp.datavessel.io/mcp`.
 
-### Claude Desktop / Cursor (universal, via `mcp-remote`)
+**Authentication is handled automatically over OAuth — there is no API key to
+copy or paste.** datavessel implements the MCP authorization spec: the first time
+you connect, your client discovers the server's OAuth metadata, **registers itself
+dynamically (DCR)**, and opens a browser to sign you in. Tokens (with PKCE) are
+issued and refreshed by the client for you.
 
-```json
-{
-  "mcpServers": {
-    "datavessel": {
-      "command": "npx",
-      "args": [
-        "-y", "mcp-remote",
-        "https://mcp.datavessel.io/mcp",
-        "--header", "Authorization: Bearer ${DATAVESSEL_API_KEY}"
-      ],
-      "env": { "DATAVESSEL_API_KEY": "your-api-key" }
-    }
-  }
-}
-```
+### Clients with native remote MCP support (Claude, etc.)
 
-### Clients with native remote MCP support
+Add the remote server by URL — your client runs the OAuth flow on first connect:
 
 ```json
 {
   "mcpServers": {
     "datavessel": {
       "type": "streamable-http",
-      "url": "https://mcp.datavessel.io/mcp",
-      "headers": { "Authorization": "Bearer your-api-key" }
+      "url": "https://mcp.datavessel.io/mcp"
     }
   }
 }
 ```
 
-Restart your client; the datavessel tools will appear. Your agent calls
-`authenticate` first, then any tool above.
+### Clients without native remote support (via `mcp-remote`)
+
+`mcp-remote` bridges a stdio client to the remote server and performs the same
+OAuth/DCR handshake — again, **no token in the config**:
+
+```json
+{
+  "mcpServers": {
+    "datavessel": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.datavessel.io/mcp"]
+    }
+  }
+}
+```
+
+On first connect a browser window opens to authorize datavessel; approve it once
+and the tools appear. If a connection ever fails with an auth error, clear your
+client's saved tokens and reconnect — it will re-register automatically.
 
 ## Pricing
 
