@@ -1,0 +1,27 @@
+{
+  "name": "datavessel",
+  "description": "100+ read/write tools across GA4, Search Console, Google/Meta Ads, Shopify, WooCommerce, Shopware, Slack and LinkedIn via the hosted datavessel MCP server (BYOK, OAuth). Includes a skill for driving the datavessel CLI.",
+  "version": "0.1.0",
+  "author": {
+    "name": "datavessel",
+    "email": "hello@datavessel.io",
+    "url": "https://datavessel.io"
+  },
+  "homepage": "https://datavessel.io",
+  "repository": "https://github.com/djr4/datavessel-mcp-public",
+  "license": "Apache-2.0",
+  "keywords": [
+    "analytics",
+    "ecommerce",
+    "ga4",
+    "search-console",
+    "google-ads",
+    "meta-ads",
+    "shopify",
+    "woocommerce",
+    "shopware",
+    "slack",
+    "linkedin",
+    "mcp"
+  ]
+}

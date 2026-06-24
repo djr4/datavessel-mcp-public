@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "datavessel": {
+      "type": "http",
+      "url": "https://mcp.datavessel.io/mcp"
+    }
+  }
+}
